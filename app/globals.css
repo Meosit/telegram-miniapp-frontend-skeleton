@@ -1,0 +1,197 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 3.9%;
+  --border: 0 0% 89.8%;
+  --radius: 0.5rem;
+
+  --tg-theme-accent-text-color: #6ab2f2;
+  --tg-theme-bg-color: #17212b;
+  --tg-theme-button-color: #5288c1;
+  --tg-theme-button-text-color: #ffffff;
+  --tg-theme-bottom-bar-bg-color: #17212b;
+  --tg-theme-destructive-text-color: #ec3942;
+  --tg-theme-header-bg-color: #17212b;
+  --tg-theme-hint-color: #708499;
+  --tg-theme-link-color: #6ab3f3;
+  --tg-theme-secondary-bg-color: #232e3c;
+  --tg-theme-section-bg-color: #17212b;
+  --tg-theme-section-header-text-color: #6ab3f3;
+  --tg-theme-section-separator-color: #31404f;
+  --tg-theme-subtitle-text-color: #708499;
+  --tg-theme-text-color: #f5f5f5;
+  --tg-theme-success-text: #2ecc71;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--tg-theme-text-color);
+    background: var(--tg-theme-secondary-bg-color);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    user-select: none;
+  }
+
+  button {
+    font: inherit;
+  }
+
+  input,
+  textarea {
+    user-select: text;
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.tg-bg {
+  background-color: var(--tg-theme-secondary-bg-color);
+}
+
+.tg-section-bg {
+  background-color: var(--tg-theme-section-bg-color);
+}
+
+.border-tg-bg {
+  border-color: var(--tg-theme-secondary-bg-color);
+}
+
+.border-tg-section {
+  border-color: var(--tg-theme-section-bg-color);
+}
+
+.border-tg-section-separator {
+  border-color: var(--tg-theme-section-separator-color);
+}
+
+.border-tg-button {
+  border-color: var(--tg-theme-button-color);
+}
+
+.border-tg-text {
+  border-color: var(--tg-theme-text-color);
+}
+
+.tg-text {
+  color: var(--tg-theme-text-color);
+}
+
+.tg-accent-text {
+  color: var(--tg-theme-accent-text-color);
+}
+
+.tg-subtitle-text {
+  color: var(--tg-theme-subtitle-text-color);
+}
+
+.tg-hint-text {
+  color: var(--tg-theme-hint-color);
+}
+
+.tg-button {
+  background-color: var(--tg-theme-button-color);
+  color: var(--tg-theme-button-text-color);
+}
+
+.tg-button-text {
+  color: var(--tg-theme-button-text-color);
+}
+
+.tg-button:disabled {
+  opacity: 0.7;
+}
+
+.tg-destructive-text {
+  color: var(--tg-theme-destructive-text-color);
+}
+
+.tg-destructive-bg {
+  background-color: var(--tg-theme-destructive-text-color);
+}
+
+.tg-success-bg {
+  background-color: var(--tg-theme-success-text);
+}
+
+.tg-success-text {
+  color: var(--tg-theme-success-text);
+}
+
+.tg-success-badge {
+  background-color: color-mix(in srgb, var(--tg-theme-success-text), transparent 82%);
+  color: var(--tg-theme-success-text);
+}
+
+.tg-accent-badge {
+  background-color: color-mix(in srgb, var(--tg-theme-accent-text-color), transparent 84%);
+  color: var(--tg-theme-accent-text-color);
+}
+
+.tg-hint-badge {
+  background-color: color-mix(in srgb, var(--tg-theme-hint-color), transparent 84%);
+  color: var(--tg-theme-hint-color);
+}
+
+.tg-destructive-badge {
+  background-color: color-mix(in srgb, var(--tg-theme-destructive-text-color), transparent 84%);
+  color: var(--tg-theme-destructive-text-color);
+}
+
+.tg-card {
+  border-radius: 0.5rem;
+  background-color: var(--tg-theme-section-bg-color);
+}
+
+.tg-list {
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background-color: var(--tg-theme-section-bg-color);
+}
+
+.tg-list-divider {
+  border-bottom: 1px solid var(--tg-theme-section-separator-color);
+}
+
+.tg-icon-tile {
+  display: flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  background-color: var(--tg-theme-button-color);
+  color: var(--tg-theme-button-text-color);
+}
+
+.tg-scale-on-press {
+  transition: transform 0.1s ease;
+}
+
+.tg-scale-on-press:active {
+  transform: scale(0.98);
+}
+
+.miniapp-shell {
+  width: 100%;
+  max-width: 32rem;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: var(--tg-theme-secondary-bg-color);
+}

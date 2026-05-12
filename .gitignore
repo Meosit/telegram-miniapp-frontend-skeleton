@@ -1,0 +1,10 @@
+.next
+out
+node_modules
+next-env.d.ts
+tsconfig.tsbuildinfo
+.localstorage
+.localstorage-shm
+.localstorage-wal
+.env*.local
+.env.development
