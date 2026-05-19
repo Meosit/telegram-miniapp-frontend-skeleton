@@ -1,4 +1,4 @@
-import type { InitData } from "@telegram-apps/sdk-react"
+import type { InitDataType as InitData } from "@tma.js/sdk-react"
 
 const DEFAULT_DEBUG_USER_IDS = [137847053]
 

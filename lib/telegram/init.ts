@@ -1,21 +1,20 @@
 import {
-  bindThemeParamsCssVars,
-  bindViewportCssVars,
-  emitEvent,
-  expandViewport,
+  backButton,
   init as initSDK,
+  initData,
+  miniApp,
+  themeParams,
+  viewport,
+  type ThemeParamsType as ThemeParams,
+} from "@tma.js/sdk-react"
+import {
+  emitEvent,
   isTMA,
   mockTelegramEnv,
-  mountBackButton,
-  mountMiniAppSync,
-  mountViewport,
   postEvent,
-  restoreInitData,
   retrieveLaunchParams,
   setDebug,
-  themeParamsState,
-  type ThemeParams,
-} from "@telegram-apps/sdk-react"
+} from "@tma.js/bridge"
 import { canEnableDebugFromInitData } from "@/lib/telegram/debug"
 import { mockEnv } from "@/lib/telegram/mock-env"
 
@@ -63,7 +62,7 @@ export async function initTelegram(options: TelegramInitOptions = {}): Promise<T
   isInitializing = true
 
   try {
-    const detectedTMA = await isTMA("complete", { timeout: 100, rejectOnAbort: false }).catch(() => false)
+    const detectedTMA = await isTMA("complete", { timeout: 100 }).catch(() => false)
     if (!detectedTMA) {
       isMocked = await mockEnv(Boolean(options.forceMock))
     }
@@ -90,18 +89,22 @@ export async function initTelegram(options: TelegramInitOptions = {}): Promise<T
       patchMacOSClientQuirks()
     }
 
-    mountBackButton.ifAvailable()
-    restoreInitData()
+    backButton.mount.ifAvailable()
+    initData.restore()
 
-    if (mountMiniAppSync.isAvailable()) {
-      mountMiniAppSync()
-      bindThemeParamsCssVars()
+    if (themeParams.mount.isAvailable()) {
+      themeParams.mount()
+      themeParams.bindCssVars.ifAvailable()
     }
 
-    if (mountViewport.isAvailable()) {
-      await mountViewport()
-      bindViewportCssVars()
-      expandViewport.ifAvailable()
+    if (miniApp.mount.isAvailable()) {
+      miniApp.mount()
+    }
+
+    if (viewport.mount.isAvailable()) {
+      await viewport.mount()
+      viewport.bindCssVars.ifAvailable()
+      viewport.expand.ifAvailable()
     }
 
     try {
@@ -142,18 +145,18 @@ function patchMacOSClientQuirks(): void {
 
   mockTelegramEnv({
     onEvent(event, next) {
-      if (event[0] === "web_app_request_theme") {
-        let themeParams: ThemeParams = {}
+      if (event.name === "web_app_request_theme") {
+        let nextThemeParams: ThemeParams = {}
         if (firstThemeSent) {
-          themeParams = themeParamsState()
+          nextThemeParams = themeParams.state()
         } else {
           firstThemeSent = true
-          themeParams = safeRetrieveLaunchParams()?.tgWebAppThemeParams || {}
+          nextThemeParams = safeRetrieveLaunchParams()?.tgWebAppThemeParams || {}
         }
-        return emitEvent("theme_changed", { theme_params: themeParams })
+        return emitEvent("theme_changed", { theme_params: nextThemeParams })
       }
 
-      if (event[0] === "web_app_request_safe_area") {
+      if (event.name === "web_app_request_safe_area") {
         return emitEvent("safe_area_changed", {
           left: 0,
           top: 0,

@@ -1,4 +1,4 @@
-import type { ThemeParams } from "@telegram-apps/sdk-react"
+import type { ThemeParamsType as ThemeParams } from "@tma.js/sdk-react"
 
 export const lightTheme: ThemeParams = {
   accent_text_color: "#007aff",

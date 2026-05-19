@@ -1,16 +1,13 @@
 "use client"
 
 import {
-  initDataRaw as readInitDataRaw,
-  initDataState as readInitData,
+  initData as sdkInitData,
   miniApp,
-  retrieveLaunchParams,
-  themeParamsSectionBackgroundColor,
-  themeParamsState,
-  postEvent,
-  type InitData,
+  themeParams,
+  type InitDataType as InitData,
   type Platform,
-} from "@telegram-apps/sdk-react"
+} from "@tma.js/sdk-react"
+import { postEvent, retrieveLaunchParams } from "@tma.js/bridge"
 import { createContext, type ReactNode, useContext, useEffect, useMemo, useState } from "react"
 import { initTelegram } from "@/lib/telegram/init"
 import { detectTelegramInitMode, type TelegramInitModeInfo } from "@/lib/telegram/launch-mode"
@@ -80,9 +77,9 @@ export function TelegramProvider({ children }: { children: ReactNode }) {
       return
     }
 
-    const unsubscribeTheme = themeParamsState.sub(() => {
+    const unsubscribeTheme = themeParams.state.sub(() => {
       try {
-        const sectionColor = themeParamsSectionBackgroundColor()
+        const sectionColor = themeParams.sectionBgColor()
         if (sectionColor) {
           postEvent("web_app_set_header_color", { color: sectionColor })
         }
@@ -129,8 +126,8 @@ function readTelegramState(isTelegram: boolean, isMocked: boolean, debugEnabled:
     }
   }
 
-  const initDataRaw = safeRead(readInitDataRaw)
-  const initData = safeRead(readInitData)
+  const initDataRaw = safeRead(sdkInitData.raw)
+  const initData = safeRead(sdkInitData.state)
   const launchParams = safeRead(() => retrieveLaunchParams()) as {
     tgWebAppPlatform?: Platform
     tgWebAppStartParam?: string

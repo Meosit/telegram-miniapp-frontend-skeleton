@@ -9,7 +9,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@telegram-apps/sdk-react": "^3.3.2",
+    "@tma.js/bridge": "^2.3.0",
+    "@tma.js/sdk-react": "^3.0.19",
     "autoprefixer": "^10.4.20",
     "clsx": "^2.1.1",
     "eruda": "^3.4.3",

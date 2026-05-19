@@ -1,7 +1,7 @@
 "use client"
 
 import { UserRound } from "lucide-react"
-import type { InitData } from "@telegram-apps/sdk-react"
+import type { InitDataType as InitData } from "@tma.js/sdk-react"
 
 interface UserAvatarProps {
   user?: InitData["user"]

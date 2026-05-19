@@ -1,15 +1,13 @@
 import {
   backButton,
   hapticFeedback as sdkHapticFeedback,
-  openInvoice as sdkOpenInvoice,
+  invoice,
   openLink as sdkOpenLink,
-  postEvent,
   shareMessage as sdkShareMessage,
   shareURL as sdkShareURL,
-  type InvoiceStatus,
-  type MethodName,
   type OpenLinkOptions,
-} from "@telegram-apps/sdk-react"
+} from "@tma.js/sdk-react"
+import { postEvent, type InvoiceStatus, type MethodName } from "@tma.js/bridge"
 
 export const hapticFeedback = {
   impactOccurred(style: "light" | "medium" | "heavy" | "rigid" | "soft" = "light") {
@@ -93,11 +91,11 @@ export async function shareMessage(messageId: string): Promise<boolean> {
 }
 
 export async function openInvoice(invoiceUrl: string): Promise<InvoiceStatus | "unsupported"> {
-  if (!sdkOpenInvoice.isAvailable()) {
+  if (!invoice.openUrl.isAvailable()) {
     return "unsupported"
   }
 
-  return sdkOpenInvoice(invoiceUrl, "url")
+  return invoice.openUrl(invoiceUrl)
 }
 
 export function safePostEvent<M extends MethodName>(

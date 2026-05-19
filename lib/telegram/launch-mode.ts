@@ -1,4 +1,4 @@
-import type { InitData, LaunchParams } from "@telegram-apps/sdk-react"
+import type { InitDataType as InitData, LaunchParams } from "@tma.js/sdk-react"
 
 export type TelegramInitMode =
   | "browser"

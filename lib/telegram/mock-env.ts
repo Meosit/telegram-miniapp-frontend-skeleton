@@ -1,4 +1,4 @@
-import { emitEvent, isTMA, mockTelegramEnv } from "@telegram-apps/sdk-react"
+import { emitEvent, isTMA, mockTelegramEnv } from "@tma.js/bridge"
 import { mockTheme } from "@/lib/telegram/themes"
 
 const HARDCODED_MOCK_USER = JSON.stringify({
@@ -14,7 +14,7 @@ export async function mockEnv(forceDevelopment = false): Promise<boolean> {
     return false
   }
 
-  const isTelegram = await isTMA("complete", { timeout: 100, rejectOnAbort: false }).catch(() => false)
+  const isTelegram = await isTMA("complete", { timeout: 100 }).catch(() => false)
   if (isTelegram) {
     return false
   }
@@ -38,7 +38,7 @@ export async function mockEnv(forceDevelopment = false): Promise<boolean> {
 
   mockTelegramEnv({
     onEvent(event) {
-      if (event[0] === "web_app_request_viewport") {
+      if (event.name === "web_app_request_viewport") {
         return emitEvent("viewport_changed", {
           height: window.innerHeight,
           width: window.innerWidth,
@@ -47,11 +47,11 @@ export async function mockEnv(forceDevelopment = false): Promise<boolean> {
         })
       }
 
-      if (event[0] === "web_app_request_content_safe_area") {
+      if (event.name === "web_app_request_content_safe_area") {
         return emitEvent("content_safe_area_changed", noInsets)
       }
 
-      if (event[0] === "web_app_request_safe_area") {
+      if (event.name === "web_app_request_safe_area") {
         return emitEvent("safe_area_changed", noInsets)
       }
     },
