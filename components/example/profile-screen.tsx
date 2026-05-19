@@ -27,7 +27,7 @@ export function ProfileScreen() {
 
       <section className="tg-card p-4">
         <h2 className="font-semibold tg-text">Parsed start parameter</h2>
-        <pre className="mt-3 max-h-48 overflow-auto whitespace-pre-wrap break-words rounded-md p-3 text-xs tg-bg tg-subtitle-text">
+        <pre className="mt-3 max-h-48 overflow-auto whitespace-pre-wrap wrap-break-word rounded-md p-3 text-xs tg-bg tg-subtitle-text">
           {JSON.stringify(parsedStartParam, null, 2)}
         </pre>
       </section>
@@ -47,7 +47,7 @@ export function ProfileScreen() {
 
       <section className="tg-card p-4">
         <h2 className="font-semibold tg-text">Raw init data</h2>
-        <p className="mt-3 break-words text-xs leading-5 tg-subtitle-text">
+        <p className="mt-3 wrap-break-word text-xs leading-5 tg-subtitle-text">
           {initDataRaw || "Unavailable outside Telegram or development mock mode."}
         </p>
       </section>

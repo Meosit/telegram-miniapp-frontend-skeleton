@@ -24,7 +24,7 @@ export function ErrorScreen({
         <h1 className="mt-4 text-lg font-semibold tg-text">{title}</h1>
         <p className="mt-2 text-sm leading-6 tg-subtitle-text">{message}</p>
         {getErrorMessage(error) && (
-          <p className="mt-3 break-words rounded-md p-3 text-xs tg-bg tg-hint-text">{getErrorMessage(error)}</p>
+          <p className="mt-3 wrap-break-word rounded-md p-3 text-xs tg-bg tg-hint-text">{getErrorMessage(error)}</p>
         )}
         {onRetry && (
           <button className="mt-5 flex w-full items-center justify-center gap-2 rounded-lg px-4 py-3 font-medium tg-button tg-scale-on-press" onClick={onRetry}>
